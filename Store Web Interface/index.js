@@ -7,7 +7,7 @@ var router = express.Router();
 
 // Initial dummy route for testing
 router.get('/', function(req, res) {
-  res.end('Twitatron');
+  res.end('test');
 });
 
 // Register all our routes
