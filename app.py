@@ -19,7 +19,7 @@ def delete_table(table_name):
 def clear_table(table_name):
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
-	order_db.execute('''DELETE FROM'''+ table_name)
+	order_db.execute('''DELETE FROM '''+ table_name)
 	conn.commit()
 	conn.close()
 
@@ -61,7 +61,18 @@ def create_database():
 	conn.commit()
 	conn.close()
 
+def insert_order(order_num, date, name, phone, email):
+	conn = sqlite3.connect('happy_architecture.db')
+	order_db = conn.cursor()
+	order_db.execute('''INSERT INTO INDIVID_ORDERS(order_number, todays_date, name, phone, email)
+						VALUES(?,?,?,?,?);''',(order_num,date,name,phone,email))
+	conn.commit()
+
+	print order_db.execute('''SELECT * FROM INDIVID_ORDERS''').fetchall()
+	conn.commit()
+	conn.close()
 
 if __name__ == "__main__":
-	create_database()
+	clear_table('INDIVID_ORDERS')
+	insert_order(1235, 8/10/2016, 'Lucy', '9082083212', 'shopper@gmail.com')
 	app.run(debug=True, threaded=True, port=5000)
