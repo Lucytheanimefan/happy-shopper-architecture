@@ -75,12 +75,20 @@ def insert_order_items(order_num, unique_id, item_name, quantity, price):
 	order_db.execute('''INSERT INTO ORDER_ITEMS(order_number, unique_id, ITEM, quantity, price, subtotal)
 						VALUES(?,?,?,?,?,?);''',(order_num,unique_id,item_name,quantity,price, float(price)*quantity))
 	conn.commit()
+	conn.close()
 
+def create_table_relationships():
+	conn = sqlite3.connect('happy_architecture.db')
+	order_db = conn.cursor()
+	print order_db.execute('''SELECT NAME, TODAYS_DATE, ITEM FROM INDIVID_ORDERS CROSS JOIN ORDER_ITEMS;''').fetchall()
+	conn.commit()
 	conn.close()
 
 def print_all_tables():
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
+	print order_db.execute('''PRAGMA table_info(INDIVID_ORDERS)''').fetchall()
+	conn.commit()
 	print order_db.execute('''SELECT * FROM INDIVID_ORDERS''').fetchall()
 	conn.commit()
 	print order_db.execute('''SELECT * FROM ORDER_ITEMS''').fetchall()
@@ -91,7 +99,8 @@ def print_all_tables():
 if __name__ == "__main__":
 	clear_table('INDIVID_ORDERS')
 	clear_table('ORDER_ITEMS')
-	insert_order(1235, 8/10/2016, 'Lucy', '9082083212', 'shopper@gmail.com')
+	insert_order(1235, '2016-08-10', 'Lucy', '9082083212', 'shopper@gmail.com')
 	insert_order_items(1235, '8y734z','apple',5,'0.5')
 	print_all_tables()
+	create_table_relationships()
 	app.run(debug=True, threaded=True, port=5000)
