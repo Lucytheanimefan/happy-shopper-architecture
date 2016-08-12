@@ -67,12 +67,31 @@ def insert_order(order_num, date, name, phone, email):
 	order_db.execute('''INSERT INTO INDIVID_ORDERS(order_number, todays_date, name, phone, email)
 						VALUES(?,?,?,?,?);''',(order_num,date,name,phone,email))
 	conn.commit()
+	conn.close()
 
+def insert_order_items(order_num, unique_id, item_name, quantity, price):
+	conn = sqlite3.connect('happy_architecture.db')
+	order_db = conn.cursor()
+	order_db.execute('''INSERT INTO ORDER_ITEMS(order_number, unique_id, ITEM, quantity, price, subtotal)
+						VALUES(?,?,?,?,?,?);''',(order_num,unique_id,item_name,quantity,price, float(price)*quantity))
+	conn.commit()
+
+	conn.close()
+
+def print_all_tables():
+	conn = sqlite3.connect('happy_architecture.db')
+	order_db = conn.cursor()
 	print order_db.execute('''SELECT * FROM INDIVID_ORDERS''').fetchall()
+	conn.commit()
+	print order_db.execute('''SELECT * FROM ORDER_ITEMS''').fetchall()
 	conn.commit()
 	conn.close()
 
+
 if __name__ == "__main__":
 	clear_table('INDIVID_ORDERS')
+	clear_table('ORDER_ITEMS')
 	insert_order(1235, 8/10/2016, 'Lucy', '9082083212', 'shopper@gmail.com')
+	insert_order_items(1235, '8y734z','apple',5,'0.5')
+	print_all_tables()
 	app.run(debug=True, threaded=True, port=5000)
