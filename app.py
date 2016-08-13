@@ -1,9 +1,9 @@
 from flask import Flask
 import sqlite3
+import os
+from jinja2 import Template
 
 app = Flask(__name__)
-
-
 
 @app.route('/')
 def hello_world():
@@ -34,7 +34,7 @@ def create_database():
 	order_db.execute('''CREATE TABLE INDIVID_ORDERS
 	       (ORDER_NUMBER INT PRIMARY KEY     NOT NULL,
 	       TODAYS_DATE           DATE    NOT NULL,
-	       NAME            INT     NOT NULL,
+	       NAME            TEXT     NOT NULL,
 	       PHONE        TEXT NOT NULL,
 	       EMAIL        TEXT NOT NULL);''')
 	conn.commit()
@@ -61,6 +61,14 @@ def create_database():
 	conn.commit()
 	conn.close()
 
+"""Inserts an order into the INDIVID_ORDERS database.
+
+:param order_num: The order number (int)
+:param date: The date of purchase (date: xxxx-xx-xx)
+:param name: Name of customer (string)
+:param phone: Phone number (string)
+:param email: Email (string)
+"""
 def insert_order(order_num, date, name, phone, email):
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
@@ -69,6 +77,14 @@ def insert_order(order_num, date, name, phone, email):
 	conn.commit()
 	conn.close()
 
+"""Inserts an order's individual item into the ORDER_ITEMS database.
+
+:param order_num: The order number (int)
+:param unique_id: The item's unique id (string)
+:param item_name: Name of the object(string)
+:param quantity: Quantity(int)
+:param price: Price of the individual item (string)
+"""
 def insert_order_items(order_num, unique_id, item_name, quantity, price):
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
@@ -95,12 +111,16 @@ def print_all_tables():
 	conn.commit()
 	conn.close()
 
+#returns the unique ID for a purchase
+def generateUniqueID():
+
+
 
 if __name__ == "__main__":
-	clear_table('INDIVID_ORDERS')
-	clear_table('ORDER_ITEMS')
-	insert_order(1235, '2016-08-10', 'Lucy', '9082083212', 'shopper@gmail.com')
-	insert_order_items(1235, '8y734z','apple',5,'0.5')
+	#clear_table('INDIVID_ORDERS')
+	#clear_table('ORDER_ITEMS')
+	insert_order(1236, '2016-08-10', 'Bihan', '9082073212', 'shopper1@gmail.com')
+	insert_order_items(1236, '8y834z','orange',5,'0.5')
 	print_all_tables()
 	create_table_relationships()
 	app.run(debug=True, threaded=True, port=5000)
