@@ -2,6 +2,7 @@ from flask import Flask
 import sqlite3
 import os
 from jinja2 import Template
+import uuid
 
 app = Flask(__name__)
 
@@ -113,14 +114,14 @@ def print_all_tables():
 
 #returns the unique ID for a purchase
 def generateUniqueID():
-
+	return str(uuid.uuid4())[:8]
 
 
 if __name__ == "__main__":
-	#clear_table('INDIVID_ORDERS')
-	#clear_table('ORDER_ITEMS')
+	clear_table('INDIVID_ORDERS')
+	clear_table('ORDER_ITEMS')
 	insert_order(1236, '2016-08-10', 'Bihan', '9082073212', 'shopper1@gmail.com')
-	insert_order_items(1236, '8y834z','orange',5,'0.5')
+	insert_order_items(1236, generateUniqueID(),'orange',5,'0.5')
 	print_all_tables()
 	create_table_relationships()
 	app.run(debug=True, threaded=True, port=5000)
