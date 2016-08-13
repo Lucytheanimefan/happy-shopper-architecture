@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import *
 import sqlite3
 import os
 from jinja2 import Template
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template("index.html")
 
 def delete_table(table_name):
 	conn = sqlite3.connect('happy_architecture.db')
@@ -116,12 +116,21 @@ def print_all_tables():
 def generateUniqueID():
 	return str(uuid.uuid4())[:8]
 
+#create the html table
+@app.route('/generate_table')
+def print_items():
+	conn = sqlite3.connect('happy_architecture.db')
+	order_db = conn.cursor()
+	table_data = order_db.execute('SELECT ORDER_NUMBER,UNIQUE_ID,ITEM,QUANTITY,PRICE,SUBTOTAL FROM ORDER_ITEMS')
+	print table_data.fetchall()
+	print "hi"
+	return render_template('index.html', items=table_data.fetchall())
 
 if __name__ == "__main__":
-	clear_table('INDIVID_ORDERS')
-	clear_table('ORDER_ITEMS')
-	insert_order(1236, '2016-08-10', 'Bihan', '9082073212', 'shopper1@gmail.com')
-	insert_order_items(1236, generateUniqueID(),'orange',5,'0.5')
+	#clear_table('INDIVID_ORDERS')
+	#clear_table('ORDER_ITEMS')
+	#insert_order(1238, '2016-08-10', 'Lucy', '9082073212', 'shopper1@gmail.com')
+	#insert_order_items(1238, generateUniqueID(),'orange',5,'0.5')
 	print_all_tables()
 	create_table_relationships()
 	app.run(debug=True, threaded=True, port=5000)
