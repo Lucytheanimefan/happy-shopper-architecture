@@ -17,6 +17,18 @@ def signup():
 def accountlocked():
     return render_template('account-locked.html')
 
+@app.route('/begin-password-reset')
+def begin_password_reset():
+    return render_template('begin-password-reset.html')
+
+@app.route('/end-password-reset')
+def end_password_reset():
+    return render_template('end-password-reset.html')
+
+@app.route('/home')
+def home():
+    return render_template('homepage.html')
+
 def delete_table(table_name):
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
