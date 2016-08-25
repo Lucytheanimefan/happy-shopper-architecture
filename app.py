@@ -1,13 +1,21 @@
-from flask import Flask
+from flask import *
 import sqlite3
 
 app = Flask(__name__)
 
 
-
+@app.route('/sign-in')
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('sign-in.html')
+
+@app.route('/sign-up')
+def signup():
+    return render_template('sign-up.html')
+
+@app.route('/account-locked')
+def accountlocked():
+    return render_template('account-locked.html')
 
 def delete_table(table_name):
 	conn = sqlite3.connect('happy_architecture.db')
@@ -103,4 +111,5 @@ if __name__ == "__main__":
 	insert_order_items(1235, '8y734z','apple',5,'0.5')
 	print_all_tables()
 	create_table_relationships()
-	app.run(debug=True, threaded=True, port=5000)
+	app.run(host="0.0.0.0", port="33")
+	#app.run(debug=True, threaded=True, port=5000)
