@@ -15,24 +15,70 @@
 
 <body>
     <div data-role="page" id="home">
+        <div data-role="panel" id="myPanel">
+            <h2>Hello</h2>
+            <ul data-role="listview" id="hamburgermenu">
+                <li><a href="home">Home</a></li>
+                <li><a href="#myaccount">My Account</a></li>
+                <li data-role="list-divider"></li>
+                <li><a href="#anylink">FAQ</a></li>
+                <li><a href="#anylink">Contact Us</a></li>
+                <li><a href="#anylink">Sign Out</a></li>
+            </ul>
+        </div>
         <div data-role="header" data-theme="c">
             <h1>Happy Grocery</h1>
+            <a href="#myPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">&#9776;</a>
         </div>
-        <!-- /header -->
+        <!-- MAIN CONTENT -->
         <div role="main" class="ui-content">
+            <a href="scan" class="ui-btn">Create a New Order</a>
+            <a href="#anylink" class="ui-btn">Return to a Previous Order</a>
         </div>
         <!-- /content -->
         <div data-role="footer">
             <div data-role="navbar">
                 <ul>
                     <li><a href="#home" data-icon="home">Home</a></li>
-                    <li><a href="#anylink">Page Two</a></li>
-                    <li><a href="#anylink">Search</a></li>
+                    <li><a href="#anylink" data-icon="info">Info</a></li>
+                    <li><a href="#anylink" data-icon="search">Search</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <!-- /page -->
+   
+    <!-- My Account -->
+    <div data-role="page" id="myaccount">
+        <div data-role="panel" id="myPanel">
+            <h2>Hello</h2>
+            <ul id="hamburgermenu" data-role="listview">
+                <li><a href="home">Home</a></li>
+                <li class="active"><a href="#myaccount">My Account</a></li>
+                <li data-role="list-divider"></li>
+                <li><a href="#anylink">FAQ</a></li>
+                <li><a href="#anylink">Contact Us</a></li>
+                <li><a href="#anylink">Sign Out</a></li>
+            </ul>
+        </div>
+        <div data-role="header" data-theme="c">
+            <h1>Happy Grocery</h1>
+            <a href="#myPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">&#9776;</a>
+        </div>
+        <!-- /header -->
+        <div role="main" class="ui-content">My Account information
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-icon="home">Home</a></li>
+                    <li><a href="#anylink" data-icon="info">Info</a></li>
+                    <li><a href="#anylink" data-icon="search">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
+<script type="text/javascript" src="../static/js/script.js"></script>
 
 </html>

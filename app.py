@@ -29,6 +29,10 @@ def end_password_reset():
 def home():
     return render_template('homepage.html')
 
+@app.route('/scan')
+def scan():
+    return render_template('scanner.html')
+
 def delete_table(table_name):
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
@@ -150,5 +154,5 @@ if __name__ == "__main__":
 	#insert_order_items(1235, '8y734z','apple',5,'0.5')
 	print_all_tables()
 	create_table_relationships()
-	app.run(host="0.0.0.0", port="33")
-	#app.run(debug=True, threaded=True, port=5000)
+	#app.run(host="0.0.0.0", port="33")
+	app.run(debug=True, threaded=True, port=5000)
