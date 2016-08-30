@@ -116,3 +116,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Scanner page*/
+
+#visuals{
+  text-align: center;
+}

@@ -31,13 +31,14 @@
             <a href="#myPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">&#9776;</a>
         </div>
         <!-- /header -->
-        <div role="main" class="ui-content">
+        <div role="main" class="ui-content" id="visuals">
             <button id="snap">Snap Photo</button>
-            <canvas id="canvas"></canvas>
-            <video id="video" muted autoplay></video>
+            <!--<canvas width="640px" height="480px" id="canvas"></canvas>-->
+            <video width="640px" height="480px" id="video" muted autoplay></video>
             <div class="select">
                 <label for="videoSource">Video source: </label>
                 <select id="videoSource"></select>
+                <div id="spinner"></div>
             </div>
         </div>
         <!-- /content -->
@@ -70,6 +71,7 @@
         }
     };
     </script> --> 
+    <script type="text/javascript" src="../static/js/spin.min.js"></script>
     <script src="../static/js/scanner.js"></script>
 </body>
 
