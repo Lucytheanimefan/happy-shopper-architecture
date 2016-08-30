@@ -130,4 +130,8 @@ document.getElementById("snap").addEventListener("click", function() {
     var target = document.getElementById('spinner');
     var spinner = new Spinner(opts).spin(target);
     console.log("Spinner going");
+
+    setTimeout(function(){
+      document.getElementById("checkout").click();
+    },2000);
 });

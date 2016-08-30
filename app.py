@@ -33,6 +33,11 @@ def home():
 def scan():
     return render_template('scanner.html')
 
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+    
 def delete_table(table_name):
 	conn = sqlite3.connect('happy_architecture.db')
 	order_db = conn.cursor()
